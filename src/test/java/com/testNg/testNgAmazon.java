@@ -18,7 +18,7 @@ import org.testng.annotations.AfterSuite;
 
 public class testNgAmazon {
 
-  @Test()
+  @Test(priority=-1)
   public void ValidateAmazonLaunching() {
 	  System.out.println("inside ValidateAmazonLaunching");
 	  WebDriverManager.chromedriver().setup();
@@ -28,6 +28,12 @@ public class testNgAmazon {
 	  String title = driver.getTitle();
 	  System.out.println("title:"+title);
 	  Assert.assertEquals(title, "Online site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in");
+	  
+  }
+  
+  @Test(priority=2)
+  public void testcase2() {
+	  System.out.println("inside testcase2");
 	  
   }
   
