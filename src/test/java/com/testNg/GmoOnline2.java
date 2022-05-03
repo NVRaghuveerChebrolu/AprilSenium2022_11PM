@@ -11,11 +11,20 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.opera.OperaDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
@@ -23,13 +32,14 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 
-public class GmoOnline {
+public class GmoOnline2 {
 	WebDriver driver;
+	Properties objProp;
 
 	@Test(priority = -1)
 	public void LaunchGmoOnline() {
 		System.out.println("inside LaunchGmoOnline");
-		driver.get("http://demo.borland.com/gmopost/");
+		driver.get(objProp.getProperty("GMOonlineURL"));
 		driver.manage().window().maximize();
 		String title = driver.getTitle();
 		System.out.println("title:" + title);
@@ -98,7 +108,10 @@ public class GmoOnline {
 	@BeforeTest
 	public void beforeTest() {
 		System.out.println("inside beforeTest");
+		LaunchBrowser();
 	}
+
+	
 
 	@AfterTest
 	public void afterTest() {
@@ -106,10 +119,49 @@ public class GmoOnline {
 	}
 
 	@BeforeSuite
-	public void beforeSuite() {
+	public void beforeSuite() throws Exception {
 		System.out.println("inside beforeSuite");
-		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+		ReadPropertiesFile();
+	}
+
+	public void ReadPropertiesFile() throws Exception {
+		try {
+			FileInputStream objFileinputStream = new FileInputStream(new File(System.getProperty("user.dir")+
+					"//src//test//resources//ConfigurationProperty.properties"));
+			objProp = new Properties();
+			objProp.load(objFileinputStream);
+			System.out.println(objProp.getProperty("browser"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	public void LaunchBrowser() {
+		String browser = objProp.getProperty("browser");
+		switch(browser) {
+		case "chrome":
+			WebDriverManager.chromedriver().setup();
+			driver= new ChromeDriver();
+		break;
+		case "firefox":
+			WebDriverManager.firefoxdriver().setup();
+			driver= new FirefoxDriver();
+		break;
+		case "IE":
+			WebDriverManager.iedriver().setup();
+			driver= new InternetExplorerDriver();
+		break;
+		case "edge":
+			WebDriverManager.edgedriver().setup();
+			driver= new EdgeDriver();
+		break;
+		case "opera":
+			WebDriverManager.operadriver().setup();
+			driver= new OperaDriver();
+		break;	
+		}
+		
 	}
 
 	@AfterSuite
