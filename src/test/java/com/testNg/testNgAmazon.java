@@ -2,6 +2,8 @@ package com.testNg;
 
 import org.testng.annotations.Test;
 
+import com.utility.LibraryFunctions;
+
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 import org.testng.annotations.BeforeMethod;
@@ -21,11 +23,14 @@ public class testNgAmazon {
   @Test(priority=-1)
   public void ValidateAmazonLaunching() {
 	  System.out.println("inside ValidateAmazonLaunching");
-	  WebDriverManager.chromedriver().setup();
-	  WebDriver driver = new ChromeDriver();
-	  driver.get("https://www.amazon.co.in");
-	  driver.manage().window().maximize();
-	  String title = driver.getTitle();
+		/*
+		 * WebDriverManager.chromedriver().setup(); 
+		 * WebDriver driver = new
+		 * ChromeDriver();
+		 */
+	  LibraryFunctions.driver.get("https://www.amazon.co.in");
+	  LibraryFunctions.driver.manage().window().maximize();
+	  String title = LibraryFunctions.driver.getTitle();
 	  System.out.println("title:"+title);
 	  Assert.assertEquals(title, "Online site in India: Shop Online for Mobiles, Books, Watches, Shoes and More - Amazon.in");
 	  
@@ -61,6 +66,7 @@ public class testNgAmazon {
   @BeforeTest
   public void beforeTest() {
 	  System.out.println("inside beforeTest");
+	  LibraryFunctions.LaunchBrowser();
   }
 
   @AfterTest
@@ -71,6 +77,12 @@ public class testNgAmazon {
   @BeforeSuite
   public void beforeSuite() {
 	  System.out.println("inside beforeSuite");
+	  try {
+		  LibraryFunctions.ReadPropertiesFile();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
   }
 
   @AfterSuite

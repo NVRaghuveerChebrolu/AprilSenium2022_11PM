@@ -4,6 +4,7 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.fasterxml.jackson.databind.ser.std.StdArraySerializers.FloatArraySerializer;
+import com.utility.LibraryFunctions;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -32,9 +33,7 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 
-public class GmoOnline2 {
-	WebDriver driver;
-	Properties objProp;
+public class GmoOnline2 extends LibraryFunctions{
 
 	@Test(priority = -1)
 	public void LaunchGmoOnline() {
@@ -124,46 +123,7 @@ public class GmoOnline2 {
 		ReadPropertiesFile();
 	}
 
-	public void ReadPropertiesFile() throws Exception {
-		try {
-			FileInputStream objFileinputStream = new FileInputStream(new File(System.getProperty("user.dir")+
-					"//src//test//resources//ConfigurationProperty.properties"));
-			objProp = new Properties();
-			objProp.load(objFileinputStream);
-			System.out.println(objProp.getProperty("browser"));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
 	
-	public void LaunchBrowser() {
-		String browser = objProp.getProperty("browser");
-		switch(browser) {
-		case "chrome":
-			WebDriverManager.chromedriver().setup();
-			driver= new ChromeDriver();
-		break;
-		case "firefox":
-			WebDriverManager.firefoxdriver().setup();
-			driver= new FirefoxDriver();
-		break;
-		case "IE":
-			WebDriverManager.iedriver().setup();
-			driver= new InternetExplorerDriver();
-		break;
-		case "edge":
-			WebDriverManager.edgedriver().setup();
-			driver= new EdgeDriver();
-		break;
-		case "opera":
-			WebDriverManager.operadriver().setup();
-			driver= new OperaDriver();
-		break;	
-		}
-		
-	}
-
 	@AfterSuite
 	public void afterSuite() {
 		System.out.println("inside afterSuite");
