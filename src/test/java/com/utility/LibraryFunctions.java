@@ -3,6 +3,7 @@ package com.utility;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
+import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -54,6 +55,13 @@ public class LibraryFunctions {
 			driver= new OperaDriver();
 		break;	
 		}
+		
+		driver.get(objProp.getProperty("GMOonlineURL"));
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
+		//implicit wait is global waiting mechanism which is applicable for all Web Elements that 
+		//are declared under this.
+		
 		
 	}
 
