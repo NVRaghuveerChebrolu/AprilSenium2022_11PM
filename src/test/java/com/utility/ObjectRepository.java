@@ -11,7 +11,8 @@ public static final String Timer_Alertbutton="timerAlertButton";
 
 public static final String confirmAlertButton="confirmButton";
 public static final String confirmAlertResult="//span[@id='confirmResult']";
-
+public static final String PromptAlertButton="promtButton";
+public static final String PromptAlertResult="promptResult";
 
 
 
