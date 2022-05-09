@@ -62,7 +62,7 @@ public class LibraryFunctions {
 		break;	
 		}
 		
-		driver.get(objProp.getProperty("GMOonlineURL"));
+		driver.get("https://www.google.in");
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
 		//implicit wait is global waiting mechanism which is applicable for all Web Elements that 
