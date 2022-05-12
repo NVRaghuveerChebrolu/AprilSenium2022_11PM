@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
@@ -40,31 +41,27 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.AfterSuite;
 
-public class ValidatingFrames extends LibraryFunctions{
-
-
+public class ValidatingWindows extends LibraryFunctions{
 	@Test(priority = 1)
-	public void ValidatingFramesInAutomationTesting() {
-		System.out.println("inside ValidatingFramesInAutomationTesting");
-		driver.navigate().to(objProp.getProperty("FramesURL"));
+	public void ValidatingMultipleWindows() throws InterruptedException {
+		System.out.println("inside ValidatingMultipleWindows");
+		driver.navigate().to(objProp.getProperty("nxtgenaiacademyURL"));
 		waitForPageToLoad();
-		driver.switchTo().frame("singleframe");
-		//driver.findElement(By.xpath("//input[@type='text']")).sendKeys("Heloo How are you?");
-		LibraryFunctions.FindElementByLocator(ObjectRepository2.TextBoxOfSingle_Frame).sendKeys("Heloo How are you?");
-		driver.switchTo().defaultContent();// this method is used for bringing the control out of frame
-		LibraryFunctions.FindElementByLocator(ObjectRepository2.IframeWithInIframe).click();
-		WebElement MultipleframeElement = LibraryFunctions.FindElementByLocator(ObjectRepository2.MultipleFrame);
-		driver.switchTo().frame(MultipleframeElement);
-		WebElement SingleframeElement = LibraryFunctions.FindElementByLocator(ObjectRepository2.SingleFrame);
-		driver.switchTo().frame(SingleframeElement);
-		LibraryFunctions.FindElementByLocator(ObjectRepository2.TextBoxOfSingle_Frame).sendKeys(objProp.getProperty("framewithInFrame"));
-		driver.switchTo().defaultContent();
-		
-		WebElement Animals = LibraryFunctions.FindElementByLocator(ObjectRepository2.FrameAnimals);
-		
-		Select obj = new Select(Animals);
-		obj.deselectByVisibleText("cat");
-		
+		LibraryFunctions.FindElementByLocator(ObjectRepository2.NewBrowserWindow).click();
+		WebDriverWait wait = new WebDriverWait(driver,30);
+		Set<String> AllWindows = driver.getWindowHandles();
+		for(String Individualwindow :AllWindows) {
+			driver.switchTo().window(Individualwindow);
+			String title = driver.getTitle();
+			System.out.println("title:"+title);
+			if(title.equals("NxtGen A.I Academy – Learn With Clarity")){
+				//driver.manage().window().maximize();
+				Thread.sleep(8000);
+				LibraryFunctions.FindElementByLocator(ObjectRepository2.MenuOfNew_BrowserWindow).click();
+				//LibraryFunctions.FindElementByLocator(ObjectRepository2.About_Me_NewBrowserWindow).click();
+				driver.close();
+			}
+		}	
 	}
 	
 	

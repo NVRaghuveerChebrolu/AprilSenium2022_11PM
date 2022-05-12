@@ -2,7 +2,8 @@ package com.oopsBasics;
 
 //Proving this keyword :
 //Let's prove that this keyword refers to the current class instance variable. 
-//In this program, we are printing the reference variable and this, output of both variables are same.
+//In this program, we are printing the reference variable 
+//and this, output of both variables are same.
 
 class ProvingThisKeyWord {
 	void m() {

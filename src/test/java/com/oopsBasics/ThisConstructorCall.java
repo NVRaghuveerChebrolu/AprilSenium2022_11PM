@@ -7,7 +7,7 @@ class car {
 	}
 
 	car(int x) {
-		//System.out.println("hi");//complie time error
+	//	System.out.println("hi");//complie time error
 		this();
 		System.out.println(x);
 	}

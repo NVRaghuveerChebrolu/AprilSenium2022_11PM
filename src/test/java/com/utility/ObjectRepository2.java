@@ -20,6 +20,14 @@ public static final String MultipleFrame=constants.xpath+"&"+"//iframe[@src='Mul
 public static final String SingleFrame=constants.xpath+"&"+"//iframe[@src='SingleFrame.html']";
 
 
+public static final String FrameAnimals=constants.ID+"&"+"animals";
+
+public static final String NewBrowserWindow=constants.Name+"&"+"newbrowserwindow123";
+public static final String MenuOfNew_BrowserWindow=constants.xpath+"&"+"//span[contains(text(),'Menu')]";
+public static final String About_Me_NewBrowserWindow=constants.xpath+"&"+"/span[text()='About Me']";
+
+
+
 
 
 
