@@ -25,6 +25,10 @@ public static final String FrameAnimals=constants.ID+"&"+"animals";
 public static final String NewBrowserWindow=constants.Name+"&"+"newbrowserwindow123";
 public static final String MenuOfNew_BrowserWindow=constants.xpath+"&"+"//span[contains(text(),'Menu')]";
 public static final String About_Me_NewBrowserWindow=constants.xpath+"&"+"/span[text()='About Me']";
+public static final String MouseOperationRightClick=constants.xpath+"&"+"//span[text()='right click me']";
+public static final String SelectDeleteOptionInRightClick=constants.xpath+"&"+"//span[text()='Delete']";
+
+
 
 
 
