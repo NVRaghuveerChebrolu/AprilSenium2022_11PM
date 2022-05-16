@@ -28,6 +28,11 @@ public static final String About_Me_NewBrowserWindow=constants.xpath+"&"+"/span[
 public static final String MouseOperationRightClick=constants.xpath+"&"+"//span[text()='right click me']";
 public static final String SelectDeleteOptionInRightClick=constants.xpath+"&"+"//span[text()='Delete']";
 
+public static final String FrameOfDubleClick=constants.xpath+"&"+"//iframe";
+public static final String BoxInsideFrame=constants.xpath+"&"+"//span[contains(text(),'Double click the block')]/preceding-sibling::div";
+
+
+
 
 
 

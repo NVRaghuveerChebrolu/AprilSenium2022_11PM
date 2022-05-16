@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -53,16 +54,43 @@ public class ValidatingMouseOperations extends LibraryFunctions{
 		waitForPageToLoad();
 		WebElement element = LibraryFunctions.FindElementByLocator(ObjectRepository2.MouseOperationRightClick);
 		Actions ObjActions = new Actions(driver);
-		ObjActions.contextClick(element).build().perform();
+		ObjActions.contextClick(element).build().perform();  // to perform mouse right click operation 
 		Thread.sleep(8000);
 		WebElement DeleteElement = LibraryFunctions.FindElementByLocator(ObjectRepository2.SelectDeleteOptionInRightClick);
-		ObjActions.click(DeleteElement).build().perform();
+		ObjActions.click(DeleteElement).build().perform(); // to perform mouse click operation 
 		Alert ObjAlert = driver.switchTo().alert();
 		String AlertText = ObjAlert.getText();
 		System.out.println("AlertText:"+AlertText);
 		Assert.assertEquals(AlertText, objProp.getProperty("mouseOpeartionRightclickDeleteActionText"));
 		ObjAlert.accept();
 	}
+	
+	@Test(priority = 2)
+	public void ValidateMouseOpeartionDoubleClick() throws InterruptedException {
+		System.out.println("inside ValidateMouseOpeartionDoubleClick");
+		driver.navigate().to(objProp.getProperty("mouseOpeartionDoubleClick"));
+		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		waitForPageToLoad();
+		JavascriptExecutor js = (JavascriptExecutor)driver;
+		js.executeScript("window.scrollBy(0,1000)");// to scroll vertically downward by 500 pixels
+		//js.executeScript("window.scrollBy(0,-500)");// to scroll vertically upward by 500 pixels
+		//js.executeScript("window.scrollBy(300,0)");// to scroll horizontally right side by 300 pixels
+		//js.executeScript("window.scrollBy(-350,0)");// to scroll horizontally left side by 350 pixel
+		
+		WebElement element = LibraryFunctions.FindElementByLocator(ObjectRepository2.FrameOfDubleClick);
+		LibraryFunctions.ScrollIntoViewWithWebElement(element);
+		driver.switchTo().frame(element);
+		Actions objActions = new Actions(driver);
+		WebElement DoubleClickBox = LibraryFunctions.FindElementByLocator(ObjectRepository2.BoxInsideFrame);
+		objActions.doubleClick(DoubleClickBox).build().perform();//to perform mouse double click operation 
+		
+		//verify the back ground color of BOX (webElement)
+		String BackGroundColorOfBox  = DoubleClickBox.getCssValue("background-color");
+		System.out.println("BackGroundColorOfBox"+BackGroundColorOfBox);
+		Assert.assertEquals(BackGroundColorOfBox, objProp.getProperty("BoxYellowColor") );
+		
+	}
+	
 	
 	
 	@BeforeMethod
