@@ -77,7 +77,7 @@ public class ValidatingMouseOperations extends LibraryFunctions{
 		//js.executeScript("window.scrollBy(300,0)");// to scroll horizontally right side by 300 pixels
 		//js.executeScript("window.scrollBy(-350,0)");// to scroll horizontally left side by 350 pixel
 		
-		WebElement element = LibraryFunctions.FindElementByLocator(ObjectRepository2.FrameOfDubleClick);
+		WebElement element = LibraryFunctions.FindElementByLocator(ObjectRepository2.Frame);
 		LibraryFunctions.ScrollIntoViewWithWebElement(element);
 		driver.switchTo().frame(element);
 		Actions objActions = new Actions(driver);
@@ -88,6 +88,24 @@ public class ValidatingMouseOperations extends LibraryFunctions{
 		String BackGroundColorOfBox  = DoubleClickBox.getCssValue("background-color");
 		System.out.println("BackGroundColorOfBox"+BackGroundColorOfBox);
 		Assert.assertEquals(BackGroundColorOfBox, objProp.getProperty("BoxYellowColor") );
+		
+	}
+	
+	@Test(priority = 3)
+	public void ValidateMouseOpeartionDrapAndDrop() throws InterruptedException {
+		System.out.println("inside ValidateMouseOpeartionDrapAndDrop");
+		driver.navigate().to(objProp.getProperty("mouseOperationDragAndDrop"));
+		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
+		waitForPageToLoad();
+		WebElement element = LibraryFunctions.FindElementByLocator(ObjectRepository2.Frame);
+		driver.switchTo().frame(element);
+		Actions objActions = new Actions(driver);
+		WebElement source = LibraryFunctions.FindElementByLocator(ObjectRepository2.Draggable);
+		WebElement target = LibraryFunctions.FindElementByLocator(ObjectRepository2.Droppable);
+		//objActions.dragAndDrop(source, target).build().perform();
+		objActions.clickAndHold(source);
+		objActions.moveToElement(target);
+		objActions.release(target).build().perform();
 		
 	}
 	
