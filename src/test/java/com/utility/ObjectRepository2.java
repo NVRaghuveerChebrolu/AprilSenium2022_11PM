@@ -34,6 +34,8 @@ public static final String BoxInsideFrame=constants.xpath+"&"+"//span[contains(t
 public static final String Draggable=constants.ID+"&"+"draggable";
 public static final String Droppable=constants.ID+"&"+"droppable";
 
+public static final String WebTableRows=constants.xpath+"&"+"//table[@id='example']/tbody/tr";
+
 
 
 
