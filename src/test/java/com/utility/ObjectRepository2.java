@@ -36,6 +36,9 @@ public static final String Droppable=constants.ID+"&"+"droppable";
 
 public static final String WebTableRows=constants.xpath+"&"+"//table[@id='example']/tbody/tr";
 
+public static final String FileUploadBrowseButton=constants.xpath+"&"+"//input[@id='input-4']/preceding-sibling::span";
+
+
 
 
 
