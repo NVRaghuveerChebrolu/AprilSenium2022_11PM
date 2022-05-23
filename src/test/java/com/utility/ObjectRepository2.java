@@ -38,6 +38,9 @@ public static final String WebTableRows=constants.xpath+"&"+"//table[@id='exampl
 
 public static final String FileUploadBrowseButton=constants.xpath+"&"+"//input[@id='input-4']/preceding-sibling::span";
 
+public static final String FileDownload100Kb=constants.xpath+"&"+"//table/tbody/tr[1]/td[5]/a";
+
+
 
 
 
