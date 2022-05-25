@@ -41,6 +41,46 @@ public static final String FileUploadBrowseButton=constants.xpath+"&"+"//input[@
 public static final String FileDownload100Kb=constants.xpath+"&"+"//table/tbody/tr[1]/td[5]/a";
 
 
+public static final String DataDrivenFirstName=constants.xpath+"&"+"//input[@ng-model='FirstName']";
+public static final String DataDrivenLastName=constants.xpath+"&"+"//input[@ng-model='LastName']";
+public static final String DataDrivenAddress=constants.xpath+"&"+"//textarea[@ng-model='Adress']";
+public static final String DataDrivenEmailAddress=constants.xpath+"&"+"//input[@ng-model='EmailAdress']";
+public static final String DataDrivenPhoneNumber=constants.xpath+"&"+"//input[@ng-model='Phone']";
+public static final String DataDrivenMale=constants.xpath+"&"+"//input[@value='Male']";
+public static final String DataDrivenFeMale=constants.xpath+"&"+"//input[@value='FeMale']";
+public static final String DataDrivenCricket=constants.ID+"&"+"checkbox1";
+public static final String DataDrivenMovies=constants.ID+"&"+"checkbox2";
+public static final String DataDrivenHockey=constants.ID+"&"+"checkbox3";
+public static final String DataDrivenLanguages=constants.ID+"&"+"msdd";
+public static final String DataDrivenAllLanguages=constants.xpath+"&"+"//div[@id='msdd']/following-sibling::div/ul/li";
+public static final String DataDrivenSkillsField=constants.xpath+"&"+"//label[text()='Skills']";
+public static final String DataDrivenSkills=constants.ID+"&"+"//select[@id='Skills']";
+public static final String DataDrivenAllSkills=constants.ID+"&"+"//select[@id='Skills']/option";
+public static final String DataDrivenSelectCountry=constants.ID+"&"+"//span[@role='combobox']";
+public static final String DataDrivenTextBoxOfSelectCountry=constants.ID+"&"+"//input[@type='search']";
+
+
+public static final String DataDrivenYears=constants.ID+"&"+"//select[@id='yearbox']";
+public static final String DataDrivenAllYears=constants.ID+"&"+"//select[@id='yearbox']/option";
+
+public static final String DataDrivenMonths=constants.ID+"&"+"//select[@placeholder='Month']";
+public static final String DataDrivenAllMonths=constants.ID+"&"+"//select[@placeholder='Month']/option";
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
