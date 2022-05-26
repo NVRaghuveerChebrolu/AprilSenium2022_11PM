@@ -54,17 +54,22 @@ public static final String DataDrivenHockey=constants.ID+"&"+"checkbox3";
 public static final String DataDrivenLanguages=constants.ID+"&"+"msdd";
 public static final String DataDrivenAllLanguages=constants.xpath+"&"+"//div[@id='msdd']/following-sibling::div/ul/li";
 public static final String DataDrivenSkillsField=constants.xpath+"&"+"//label[text()='Skills']";
-public static final String DataDrivenSkills=constants.ID+"&"+"//select[@id='Skills']";
-public static final String DataDrivenAllSkills=constants.ID+"&"+"//select[@id='Skills']/option";
-public static final String DataDrivenSelectCountry=constants.ID+"&"+"//span[@role='combobox']";
-public static final String DataDrivenTextBoxOfSelectCountry=constants.ID+"&"+"//input[@type='search']";
+public static final String DataDrivenSkills=constants.xpath+"&"+"//select[@id='Skills']";
+public static final String DataDrivenAllSkills=constants.xpath+"&"+"//select[@id='Skills']/option";
+public static final String DataDrivenSelectCountry=constants.xpath+"&"+"//span[@role='combobox']";
+public static final String DataDrivenTextBoxOfSelectCountry=constants.xpath+"&"+"//input[@type='search']";
 
 
-public static final String DataDrivenYears=constants.ID+"&"+"//select[@id='yearbox']";
-public static final String DataDrivenAllYears=constants.ID+"&"+"//select[@id='yearbox']/option";
+public static final String DataDrivenDOB_Years=constants.xpath+"&"+"//select[@id='yearbox']";
+public static final String DataDrivenDOB_AllYears=constants.xpath+"&"+"//select[@id='yearbox']/option";
 
-public static final String DataDrivenMonths=constants.ID+"&"+"//select[@placeholder='Month']";
-public static final String DataDrivenAllMonths=constants.ID+"&"+"//select[@placeholder='Month']/option";
+public static final String DataDrivenDOB_Months=constants.xpath+"&"+"//select[@placeholder='Month']";
+public static final String DataDrivenDOB_AllMonths=constants.xpath+"&"+"//select[@placeholder='Month']/option";
+
+public static final String DataDrivenDOB_Day=constants.ID+"&"+"daybox";
+public static final String DataDrivenDOB_AllDays=constants.xpath+"&"+"//select[@id='daybox']/option";
+public static final String DataDrivenDOB_Pwd=constants.ID+"&"+"firstpassword";
+public static final String DataDrivenDOB_ConformPwd=constants.ID+"&"+"secondpassword";
 
 
 
