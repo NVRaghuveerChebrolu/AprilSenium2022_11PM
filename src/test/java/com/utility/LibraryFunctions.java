@@ -10,6 +10,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -204,6 +205,11 @@ public class LibraryFunctions {
 		Hmap.put("Password",ObjXSSFSheet.getRow(rowNumber).getCell(16).getStringCellValue());
 		Hmap.put("confirmPwd",ObjXSSFSheet.getRow(rowNumber).getCell(17).getStringCellValue());
 		return Hmap;
+	}
+	
+	public static void WriteToExcelFile(XSSFSheet ObjXSSFSheet, int rowNumber) {
+		ObjXSSFSheet.getRow(rowNumber).getCell(18).setCellValue("Pass");
+		
 	}
 	
 	public void SelectValueFromDropDown(List<WebElement> AllDropDownItems, String DropDownValue) {

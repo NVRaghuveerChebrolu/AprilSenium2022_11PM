@@ -53,6 +53,8 @@ public static final String DataDrivenMovies=constants.ID+"&"+"checkbox2";
 public static final String DataDrivenHockey=constants.ID+"&"+"checkbox3";
 public static final String DataDrivenLanguages=constants.ID+"&"+"msdd";
 public static final String DataDrivenAllLanguages=constants.xpath+"&"+"//div[@id='msdd']/following-sibling::div/ul/li";
+public static final String DataDrivenCloseIconOfSelectedLanguage=constants.xpath+"&"+"//span[@class='ui-icon ui-icon-close']";
+
 public static final String DataDrivenSkillsField=constants.xpath+"&"+"//label[text()='Skills']";
 public static final String DataDrivenSkills=constants.xpath+"&"+"//select[@id='Skills']";
 public static final String DataDrivenAllSkills=constants.xpath+"&"+"//select[@id='Skills']/option";
