@@ -29,6 +29,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
@@ -78,13 +79,14 @@ public class ValidatingDataDrivenFrameWork extends LibraryFunctions{
 			for (int RowNumber=1 ; RowNumber<=Rows; RowNumber++) {
 				Hmap = ReadExcelFile(ObjXSSFSheet,RowNumber);
 				
-				/*
-				 * System.out.println("-------------------"); 
-				 * for(Map.Entry map :Hmap.entrySet()) 
-				 * { System.out.println(map.getKey() + ":"+map.getValue()); }
-				 * System.out.println("-------------------");
-				 */
+				System.out.println("-------------------");
+				for (Map.Entry map : Hmap.entrySet()) {
+					System.out.println(map.getKey() + ":" + map.getValue());
+				}
+				System.out.println("-------------------");
+
 				if(Hmap.get("RunMode").equalsIgnoreCase("yes")) {
+					System.out.println("Validating Row Number:"+RowNumber);
 				LibraryFunctions.FindElementByLocator(ObjectRepository2.DataDrivenFirstName).clear();
 				LibraryFunctions.FindElementByLocator(ObjectRepository2.DataDrivenFirstName).sendKeys(Hmap.get("FirstName"));
 				
@@ -162,8 +164,8 @@ public class ValidatingDataDrivenFrameWork extends LibraryFunctions{
 				WriteToExcelFile(ObjXSSFSheet,RowNumber);
 				objXSSFWorkbook.write(ObjFileOutputStream);
 				}else {
-					RowNumber=RowNumber+1;
-					System.out.println("Run mode is not marked as yes for rowNumber:"+RowNumber);
+					
+					System.out.println("Run mode is not marked as yes for rowNumber:"+RowNumber+1);
 				}
 				
 			}
