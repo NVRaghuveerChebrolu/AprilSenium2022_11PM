@@ -2,6 +2,10 @@ package com.utility;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -222,5 +226,37 @@ public class LibraryFunctions {
 			}
 		}
 	}
+	
+	public static void IteratingThroughLinksAndValidatingTheStatusCodes(List<WebElement> AllLinks) {
+		for (int i = 0; i < AllLinks.size(); i++) {
+			String IndividualLink = AllLinks.get(i).getAttribute("href");
+			try {
+				URL objUrl = new URL(IndividualLink);
+				HttpURLConnection objHppUrlConnection = (HttpURLConnection) objUrl.openConnection();
+				objHppUrlConnection.connect();
+				int StatusCode = objHppUrlConnection.getResponseCode();
+				if (StatusCode >= 100 && StatusCode <= 199) {
+					System.out.println(IndividualLink + "is a Informational link with Status Code :" + StatusCode);
+				} else if (StatusCode >= 200 && StatusCode <= 299) {
+					System.out.println(IndividualLink + "is a valid link with Status Code :" + StatusCode);
+				} else if (StatusCode >= 300 && StatusCode <= 399) {
+					System.out.println(IndividualLink + "is a Redirection link with Status Code :" + StatusCode);
+				} else if (StatusCode >= 400 && StatusCode <= 499) {
+					System.out.println(
+							IndividualLink + "is a Not a valid link with Client Error Status Code :" + StatusCode);
+				} else if (StatusCode >= 500 && StatusCode <= 599) {
+					System.out.println(
+							IndividualLink + "is a Not a valid link with Server Error Status Code :" + StatusCode);
+				}
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
+	}
+	
+	
 
 }

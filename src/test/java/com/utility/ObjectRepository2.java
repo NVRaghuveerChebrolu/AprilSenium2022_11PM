@@ -74,6 +74,11 @@ public static final String DataDrivenDOB_Pwd=constants.ID+"&"+"firstpassword";
 public static final String DataDrivenDOB_ConformPwd=constants.ID+"&"+"secondpassword";
 
 
+public static final String Links=constants.tagName+"&"+"a";
+public static final String BrokenLinks=constants.xpath+"&"+"//span[contains(text(),'Broken')]";
+
+//span[text()='Broken Links - Images']
+
 
 
 
