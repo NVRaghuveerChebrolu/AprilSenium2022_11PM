@@ -41,7 +41,7 @@ public class LibraryFunctions {
 					System.getProperty("user.dir") + "//src//test//resources//ConfigurationProperty.properties"));
 			objProp = new Properties();
 			objProp.load(objFileinputStream);
-			System.out.println(objProp.getProperty("browser"));
+			//System.out.println(objProp.getProperty("browser"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -126,6 +126,33 @@ public class LibraryFunctions {
 		}
 		return driver.findElement(Obj);
 
+	}
+	
+	public static WebElement FindElementUsingHeadLess(WebDriver unitDriver, String OrepLocator) {
+		By search = null;
+		System.out.println(OrepLocator);
+		String locator = OrepLocator.split("&")[0];
+		String value = OrepLocator.split("&")[1];
+		System.out.println(locator);
+		System.out.println(value);
+		if (locator.equals("name")) {
+			search = By.name(value);
+		} else if (locator.equals("id")) {
+			search = By.id(value);
+		} else if (locator.equals("xpath")) {
+			search = By.xpath(value);
+		} else if (locator.equals("tagName")) {
+			search = By.tagName(value);
+		} else if (locator.equals("className")) {
+			search = By.className(value);
+		} else if (locator.equals("partialLinkText")) {
+			search = By.partialLinkText(value);
+		} else if (locator.equals("cssSelector")) {
+			search = By.cssSelector(value);
+		} else if (locator.equals("linkText")) {
+			search = By.linkText(value);
+		}
+		return unitDriver.findElement(search);
 	}
 
 	public static List<WebElement> FindElementsByLocator(String OrepLocator) {
