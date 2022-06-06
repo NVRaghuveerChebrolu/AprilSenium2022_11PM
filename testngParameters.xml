@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Suite">
+	<parameter name="BrowserName" value="firefox" />
+	<test name="Test">
+	<!-- 	<parameter name="BrowserName" value="chrome" /> -->
+		<parameter name="UserName" value="user1" />
+		<parameter name="Passcode" value="pwd1" />
+		<classes>
+			<class name="com.testNg.TestngParamters" />
+		</classes>
+	</test> <!-- Test -->
+</suite> <!-- Suite -->
