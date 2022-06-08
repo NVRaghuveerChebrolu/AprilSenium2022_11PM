@@ -72,6 +72,7 @@ public class testNgAmazon {
   @AfterTest
   public void afterTest() {
 	  System.out.println("inside afterTest");
+	  LibraryFunctions.driver.close();//close the current browser that was opened.
   }
 
   @BeforeSuite
