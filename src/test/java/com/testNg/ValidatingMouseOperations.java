@@ -39,6 +39,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.AfterTest;
@@ -49,6 +50,7 @@ public class ValidatingMouseOperations extends LibraryFunctions{
 	@Test(priority = 1)
 	public void ValidateMouseOpeartionRightClick() throws InterruptedException {
 		System.out.println("inside ValidateMouseOpeartionRightClick");
+		Extent_Test = ExtentReport.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
 		driver.navigate().to(objProp.getProperty("mouseOpeartionRightClick"));
 		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 		waitForPageToLoad();
@@ -68,6 +70,7 @@ public class ValidatingMouseOperations extends LibraryFunctions{
 	@Test(priority = 2)
 	public void ValidateMouseOpeartionDoubleClick() throws InterruptedException {
 		System.out.println("inside ValidateMouseOpeartionDoubleClick");
+		Extent_Test = ExtentReport.createTest(new Object() {}.getClass().getEnclosingMethod().getName());
 		driver.navigate().to(objProp.getProperty("mouseOpeartionDoubleClick"));
 		driver.manage().timeouts().pageLoadTimeout(60, TimeUnit.SECONDS);
 		waitForPageToLoad();
@@ -87,8 +90,8 @@ public class ValidatingMouseOperations extends LibraryFunctions{
 		//verify the back ground color of BOX (webElement)
 		String BackGroundColorOfBox  = DoubleClickBox.getCssValue("background-color");
 		System.out.println("BackGroundColorOfBox"+BackGroundColorOfBox);
-		Assert.assertEquals(BackGroundColorOfBox, objProp.getProperty("BoxYellowColor") );
-		
+		Assert.assertEquals(BackGroundColorOfBox, "ex" );
+		// objProp.getProperty("BoxYellowColor")
 	}
 	
 	@Test(priority = 3)
@@ -117,14 +120,17 @@ public class ValidatingMouseOperations extends LibraryFunctions{
 	}
 
 	@AfterMethod
-	public void afterMethod() {
+	public void afterMethod(ITestResult result) {
 		System.out.println("inside afterMethod");
+		CaptureResultsinExtentReport(result);
 	}
 
 	@BeforeClass
 	public void beforeClass() {
 		System.out.println("inside beforeClass");
+		StartExtentReport();
 	}
+
 
 	@AfterClass
 	public void afterClass() {
@@ -142,6 +148,7 @@ public class ValidatingMouseOperations extends LibraryFunctions{
 	@AfterTest
 	public void afterTest() {
 		System.out.println("inside afterTest");
+		flushReport();
 	}
 
 	@BeforeSuite

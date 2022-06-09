@@ -6,17 +6,22 @@ import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,6 +32,13 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.ITestResult;
+
+import com.aventstack.extentreports.ExtentReports;
+import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
+import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
+import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
@@ -34,7 +46,87 @@ public class LibraryFunctions {
 	public static WebDriver driver;
 	public static Properties objProp;
 	HashMap<String,String> Hmap = new HashMap<String,String>();
+	public static ExtentHtmlReporter ExtenthtmlReporter;
+	public static ExtentReports ExtentReport;
+	public static ExtentTest Extent_Test;
+	
+	
+	/*
+	 * ExtentHtmlReporter : responsible for look and feel of the report ,we can
+	 * specify the report name , document title , theme of the report
+	 * 
+	 * ExtentReports : used to create entries in your report , create test cases in
+	 * report , who executed the test case, environment name , browser
+	 * 
+	 * ExtentTest : update pass fail and skips and logs the test cases results
+	 */
+	
+	public static void StartExtentReport() {
+		ExtenthtmlReporter =  new ExtentHtmlReporter(System.getProperty("user.dir") + "/test-output/ExtentReportV4.html");
+		ExtenthtmlReporter.config().setDocumentTitle("Automation Report"); // Tile of report
+		ExtenthtmlReporter.config().setReportName("Report"); // Name of the report
+		ExtenthtmlReporter.config().setTheme(Theme.STANDARD);
+		ExtentReport = new ExtentReports();
+		ExtentReport.attachReporter(ExtenthtmlReporter);
 
+		// Passing General information
+		ExtentReport.setSystemInfo("Host name", "localhost");
+		ExtentReport.setSystemInfo("Environemnt", "QA-UAT");
+		ExtentReport.setSystemInfo("user", "Raghuveer");
+		ExtentReport.setSystemInfo("Browser", "chrome");
+		
+	}
+	
+	public void CaptureResultsinExtentReport(ITestResult result) {
+		System.out.println("inside afterMethod");
+		if(result.getStatus()==ITestResult.SUCCESS) {
+			Extent_Test.log(Status.PASS, "TEST CASE Passed Is " + result.getName());
+		}else if(result.getStatus()==ITestResult.FAILURE) {
+			Extent_Test.log(Status.FAIL, "TEST CASE Failed Is " + result.getName());
+			Extent_Test.log(Status.FAIL, "TEST CASE Failed IS " + result.getThrowable());// to add error/exception in extent report
+			try {
+				String screenshotPath = LibraryFunctions.TakeScreenShot(result.getName());
+				Extent_Test.addScreenCaptureFromPath(screenshotPath);//adding screen shot to the extent report
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				Extent_Test.log(Status.FAIL, "TEST CASE Failed IS " + result.getThrowable());
+				e.printStackTrace();
+			}
+		}else if(result.getStatus()==ITestResult.SKIP) {
+			Extent_Test.log(Status.FAIL, "TEST CASE Skipped Is " + result.getName());
+			Extent_Test.log(Status.FAIL, "TEST CASE Skipped IS " + result.getThrowable()); 
+		}
+		
+	}
+	
+	/* Author : Raghuveer
+	 * This method is used to take screen shot and store the screen shots in side ScreenShot folder
+	 */
+	public static void TakeScreenShot() {
+		try {
+		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		String dateName = new SimpleDateFormat("yyyyMMDDhhmmss").format(new Date());
+		String destination = System.getProperty("user.dir") + "//ScreenShots//" + dateName + "captured.jpeg";
+		FileUtils.copyFile(src, new File(destination));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/* Author : Raghuveer
+	 * This method is used to take screen shot and store the screen shots in side ScreenShot folder
+	 */
+	public static String TakeScreenShot(String testcaseName) throws IOException {
+		
+		File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+		String dateName = new SimpleDateFormat("yyyyMMDDhhmmss").format(new Date());
+		String destination = System.getProperty("user.dir") + "//ScreenShots//" + dateName + testcaseName+"captured.jpeg";
+		FileUtils.copyFile(src, new File(destination));
+		return destination;
+		
+	}
+	
 	public static void ReadPropertiesFile() throws Exception {
 		try {
 			FileInputStream objFileinputStream = new FileInputStream(new File(
@@ -284,6 +376,12 @@ public class LibraryFunctions {
 		}
 	}
 	
+	public static void flushReport() {
+		ExtentReport.flush();
+	}
+	
+	
+
 	
 
 }
