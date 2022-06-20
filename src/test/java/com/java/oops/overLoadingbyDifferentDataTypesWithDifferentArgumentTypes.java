@@ -1,7 +1,7 @@
 package com.java.oops;
 
 class Adder123 {
-	static int add(int a, int b) {
+	static double add(int a, double b) {
 		return a + b;
 	}
 

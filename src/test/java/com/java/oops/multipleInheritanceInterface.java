@@ -1,7 +1,7 @@
 package com.java.oops;
 
 interface Printable {
-	void print();
+	void print();//this is an abstract method. No need to use abstract key word. 
 }
 
 interface Showable {
