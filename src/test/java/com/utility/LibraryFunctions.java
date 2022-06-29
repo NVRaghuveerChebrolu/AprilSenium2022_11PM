@@ -127,6 +127,21 @@ public class LibraryFunctions {
 		
 	}
 	
+	/* Author : Raghuveer
+	 * This method is used to take screen shot and store the screen shots in side ScreenShot folder
+	 */
+	public static void TakeScreenShotofSpecifiedWebElement(WebElement element) {
+		try {
+		File src = element.getScreenshotAs(OutputType.FILE);
+		String dateName = new SimpleDateFormat("yyyyMMDDhhmmss").format(new Date());
+		String destination = System.getProperty("user.dir") + "//ScreenShots//" + dateName + "captured.jpeg";
+		FileUtils.copyFile(src, new File(destination));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	public static void ReadPropertiesFile() throws Exception {
 		try {
 			FileInputStream objFileinputStream = new FileInputStream(new File(
