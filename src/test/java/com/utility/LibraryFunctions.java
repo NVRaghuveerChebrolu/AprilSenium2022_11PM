@@ -30,6 +30,8 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.opera.OperaDriver;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.ITestResult;
@@ -395,7 +397,27 @@ public class LibraryFunctions {
 		ExtentReport.flush();
 	}
 	
-	
+	public WebDriver initializeBrowser(String broswerName) {
+		DesiredCapabilities dc = new DesiredCapabilities();
+		if(broswerName.equals("chrome")) {
+			dc.setBrowserName("chrome");
+		}else if(broswerName.equals("firefox")) {
+			dc.setBrowserName("firefox");
+		}else if(broswerName.equals("safari")) {
+			dc.setBrowserName("safari");
+		}else if(broswerName.equals("edge")) {
+			dc.setBrowserName("edge");
+		}else if(broswerName.equals("ie")) {
+			dc.setBrowserName("ie");
+		}
+		try {
+			driver = new RemoteWebDriver(new URL("http://localhost:4444"),dc);	
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return driver;
+	}
 
 	
 
